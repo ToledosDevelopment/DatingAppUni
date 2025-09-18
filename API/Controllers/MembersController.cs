@@ -1,8 +1,9 @@
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
-
+[Authorize]
 public class MembersController(AppDbContext context) : BaseApiController
 {
     [HttpGet]
@@ -11,6 +12,7 @@ public class MembersController(AppDbContext context) : BaseApiController
         return Ok(context.Users.ToList());
     }
 
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public ActionResult<AppUser> GetMember(string id)
     {
