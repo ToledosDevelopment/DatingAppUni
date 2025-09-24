@@ -6,6 +6,7 @@ namespace API.Controllers;
 [Authorize]
 public class MembersController(AppDbContext context) : BaseApiController
 {
+    [AllowAnonymous]
     [HttpGet]
     public ActionResult<IReadOnlyList<AppUser>> GetMembers()
     {
