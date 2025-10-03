@@ -14,7 +14,7 @@ export class AccountService {
   baseUrl = `${environment.apiUrl}/api/`;
   currentUser = signal<User | null>(null);
 
-  register(creds: RegisterCreds) {
+  register(creds: RegisterCreds) : Observable<User>{
     return this.http.post<User>(this.baseUrl + "account/register", creds).pipe(
       tap(user => {
         if (user) {
