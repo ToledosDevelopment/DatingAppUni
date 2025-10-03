@@ -1,7 +1,6 @@
-import { Component, input, Output, output, signal } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RegisterCreds, User } from '../../types/user';
-import { EventEmitter } from 'stream';
+import { RegisterCreds } from '../../types/registerCreds';
 
 @Component({
   selector: 'app-register',
@@ -10,15 +9,14 @@ import { EventEmitter } from 'stream';
   styleUrl: './register.css'
 })
 export class Register {
+  cancelRegister = output<boolean>();
   protected creds = {} as RegisterCreds;
-  membersFromHome = input.required<User[]>();
-  cancelRegistration = output<boolean>();
 
-  register(){
-
+  register(): void {
+    console.log(this.creds);
   }
-  
-  cancel(){
-    this.cancelRegistration.emit(true);
+
+  cancel(): void {
+    this.cancelRegister.emit(false);
   }
 }
