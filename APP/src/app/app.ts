@@ -4,44 +4,15 @@ import { environment } from '../environments/environment';
 import { lastValueFrom } from 'rxjs';
 import { Nav } from './layout/nav/nav';
 import { AccountService } from '../core/services/account-service';
-import { Home } from '../features/home/home';
 import { User } from '../types/user';
 import { Router, RouterModule } from '@angular/router';
-import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule, NgClass, Nav],
+  imports: [RouterModule, Nav],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App implements OnInit {
-  private accountService = inject(AccountService);
-  private http = inject(HttpClient);
+export class App {
   protected readonly router = inject(Router);
-
-  protected readonly title = signal('Dating App')
-  protected members = signal<User[]>([]);
-
-  async ngOnInit(): Promise<void> {
-    this.setCurrentUser();
-    this.members.set(await this.getMembers())
-  }
-
-  setCurrentUser(): void {
-    const userString = localStorage.getItem("user");
-    if (!userString) return;
-    const user = JSON.parse(userString);
-    this.accountService.currentUser.set(user);
-  }
-
-  async getMembers(): Promise<User[]> {
-    try {
-      return lastValueFrom(this.http.get<User[]>(`${environment.apiUrl}/api/members`))
-    }
-    catch (error) {
-      console.error(error);
-      throw error;
-    }
-  }
 }
