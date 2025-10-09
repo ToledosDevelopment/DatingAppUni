@@ -5,6 +5,7 @@ using API.Interfaces;
 using API.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using API.Middlewares;
 
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -59,6 +60,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseCors(MyAllowSpecificOrigins);
 
