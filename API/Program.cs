@@ -47,7 +47,9 @@ builder.Services.AddCors(options =>
                         });
 });
 
+// Servicios
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IMembersRepository, MembersRepository>();
 
 var app = builder.Build();
 
