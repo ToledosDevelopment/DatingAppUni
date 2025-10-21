@@ -1,9 +1,8 @@
-using System.Threading.Tasks;
-using API.Data;
 using API.Entities;
 using API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using API.Mappers;
 namespace API.Controllers;
 [Authorize]
 public class MembersController(IMembersRepository membersRepository) : BaseApiController
@@ -23,7 +22,7 @@ public class MembersController(IMembersRepository membersRepository) : BaseApiCo
         {
             return NotFound();
         }
-        return member;
+        return member.ToResponse();
     }
 
     [HttpGet("{id}/photos")]
