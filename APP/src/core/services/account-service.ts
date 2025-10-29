@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable, tap } from 'rxjs';
-import { LoginCreds, User } from '../../types/user';
-import { RegisterCreds } from '../../types/registerCreds';
+import { LoginCreds, RegisterCreds, User } from '../../types/user';
 
 
 @Injectable({
